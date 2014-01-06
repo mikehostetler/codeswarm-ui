@@ -51,7 +51,7 @@ function listening() {
 }
 ```
 
-Here, line number 9 informs to add the `public` dir of your new module to the load path. __This way `browserswarm-ui` will first try to serve from this directory before trying the default one`__.
+Here, line number 9 informs to add the `public` dir of your new module to the load path. __This way `browserswarm-ui` will first try to serve from this directory before trying the default one__.
 
 
 ### 5. Customize it
