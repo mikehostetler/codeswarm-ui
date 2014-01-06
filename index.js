@@ -1,11 +1,9 @@
 var fork   = require('child_process').fork;
 var server = require('./server');
 
-module.exports = server;
-
-if (process.main == module) {
-  server.listen(port, listening);
+if (require.main == module) {
   var port = process.env.PORT || 1337;
+  server.listen(port, listening);
 }
 
 function listening() {
@@ -30,3 +28,7 @@ process.once('SIGINT', function() {
   if (watcher) watcher.kill();
   process.exit();
 });
+
+// Export
+module.exports = server;
+server.addDir = require('./static').addDir;

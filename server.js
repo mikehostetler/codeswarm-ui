@@ -16,6 +16,8 @@ function handleRequest(req, res) {
   // proxy github auth to strider
   if (req.url == '/auth/github') return proxy(req, res);
 
+  if (req.url == '/') return base(req, res);
+
   static.serve(req, res, triedServingStatic);
 
   function triedServingStatic(err) {
