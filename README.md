@@ -1,46 +1,59 @@
-# web-browserswarm.com
-### a Sails application
+# browserswarm-ui
 
-## Developing with Vagrant
+This module serves as a base for custom BrowserSwarm customizations.
 
-This project is set up to use Vagrant to set up a Virtual Machine to work from.
+## How to create a new BrowserSwarm customization:
 
-NOTE: You will need to also set up and install the BrowserSwarm repository for this project to work.
+### 1. Create a new module
 
-### Set up Vagrant (Only do this once)
+### 2. Insert browserswarm-ui as a dependency:
 
-1. Download and install VirtualBox by [clicking here](https://www.virtualbox.org/wiki/Downloads)
-2. Download and install Vagrant by [clicking here](http://downloads.vagrantup.com/)
-3. Clone this repository.
-4. cd web-browserswarm.com/
-5. vagrant up
-6. Grab a cup of coffee while you wait for the server to download and install. This will take a little while depending on your internet connection.
-
-### Once Vagrant as been set up
-
-1. cd web-browserswarm.com/
-2. `vagrant up` (skip this if Vagrant is already running)
-3. `vagrant ssh` (Log into the Vagrant box)
-4. `cd /vagrant` (Shared directory that maps to the local web-browserswarm.com directory)
-5. `sails lift` (Sails.js command to start the Sails server)
-6. Navigate to http://localhost:1337
-  The network port from the Virtual Machine is forwarded to your localhost
-
-## Browser debugging
-
-Browser debugging messages use [bows](https://github.com/latentflip/bows).
-
-For debugging messages to show up on browser console, do in console:
+In package.json:
 
 ```javascript
-localStorage.debug = true
+...
+  "dependencies": {
+    browserswarm-ui": "git@github.com:BrowserSwarm/browserswarm-ui"
+  }
+...
+}
 ```
 
-To add debugging messages to any part of the code do:
+### 3. Link it
+
+For development mode, you should have browserswarm-ui checked out and npm linked.
+
+Now, npm-link browserswarm-ui to your new module:
+
+```bash
+$ npm link browserswarm-ui
+```
+
+### 4. Include it
+
+Your index.js file should look something like this:
 
 ```javascript
-var log = require('bows')('my_module_name');
+var server = require('browserswarm-ui');
 
-log('this is a message to be logged');
+server.config({
+  strider: {
+    url: 'http://mystriderinstallation.com'
+  }
+});
+
+server.addDir(__dirname + '/public');
+
+server.listen(process.env.PORT || 1337, listening);
+
+function listening() {
+  console.log('BrowserSwarm Web server listening on port %d', server.address().port);
+}
 ```
 
+Here, line number 9 informs to add the `public` dir of your new module to the load path. __This way `browserswarm-ui` will first try to serve from this directory before trying the default one`.
+
+
+### 5. Customize it
+
+As said, what you place inside your `public` directory will take precedence over the default file `browserswarm-ui` serves. Use that to override `index.html`, partials, javascript or CSS files.

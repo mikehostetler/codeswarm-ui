@@ -1,6 +1,7 @@
 require('colors')
 var fork   = require('child_process').fork;
 var server = require('./server');
+var config = require('./config');
 
 if (require.main == module) {
   var port = process.env.PORT || 1337;
@@ -43,6 +44,8 @@ process.once('SIGINT', function() {
 // Exports
 
 module.exports   = server;
+
+/// addDir
 server.addDir    = addDir;
 var staticAddDir = require('./static').addDir;
 var baseAddDir   = require('./base').addDir;
@@ -50,4 +53,12 @@ var baseAddDir   = require('./base').addDir;
 function addDir(d) {
   staticAddDir(d);
   baseAddDir(d);
+}
+
+/// config
+
+server.config = configure;
+
+function configure(options) {
+  config.override(options);
 }
