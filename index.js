@@ -1,3 +1,4 @@
+require('colors')
 var fork   = require('child_process').fork;
 var server = require('./server');
 
@@ -11,14 +12,23 @@ function listening() {
 }
 
 var devMode = (process.env.NODE_ENV || 'development') == 'development';
-if (devMode) launchWatcher();
+if (devMode) {
+  console.log('development mode detected; launching watcher...');
+  launchWatcher();
+}
 
 var watcher;
 function launchWatcher() {
-  console.log('development mode detected; launching watcher...');
   if (! exiting) {
-    watcher = fork('./watch');
-    watcher.once('exit', launchWatcher);
+    watcher = fork(__dirname + '/watch');
+    watcher.once('exit', watcherExited);
+  }
+}
+
+function watcherExited() {
+  if (! exiting) {
+    console.log('Launcher exited, restarting...'.red);
+    launchWatcher();
   }
 }
 

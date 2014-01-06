@@ -16,7 +16,7 @@ var watch = [
   'public/js/controllers/**/*.js',
   'public/js/filters/**/*.js',
   'public/js/directives/**/*.js',
-];
+].map(localFile);
 
 gaze(watch, watcher);
 
@@ -41,22 +41,28 @@ function run() {
   /// add controllers
   args = args.concat(
     fs.readdirSync(__dirname + '/public/js/controllers').
-    map(prefix(__dirname + '/public/js/controllers/')).
+    map(prefix('public/js/controllers/')).
     concat(
       fs.readdirSync(__dirname + '/public/js/controllers/config').
-      map(prefix(__dirname + '/public/js/controllers/config/'))).
-    filter(isJavascript));
+      map(prefix('public/js/controllers/config/'))).
+    filter(isJavascript))
 
   /// add filters
   args = args.concat(
     fs.readdirSync(__dirname + '/public/js/filters').
     filter(isJavascript).
-    map(prefix(__dirname + '/public/js/filters/')));
+    map(prefix('public/js/filters/')));
 
   /// finalize args
   args = args.concat(['-o', 'public/js/browserswarm.js']);
+
   console.log('browserify %s'.yellow, args.join(' '));
-  var child = spawn(__dirname + '/node_modules/.bin/browserify', args, {stdio: 'inherit'});
+
+  var child = spawn(__dirname + '/node_modules/.bin/browserify', args, {
+    stdio: 'inherit',
+    cwd: __dirname
+  });
+
   child.once('exit', exited);
 }
 
@@ -78,4 +84,8 @@ function prefix(prefix) {
   return function(s) {
     return prefix + s;
   };
+}
+
+function localFile(f) {
+  return __dirname + '/' + f;
 }
