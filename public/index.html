@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="strider" content="{{config.strider.url}}">
+
+    <title>BrowserSwarm</title>
+
+    <link rel="stylesheet" href="/styles/bootstrap.css">
+    <link rel="stylesheet" href="/styles/build_remove.css">
+    <link rel="stylesheet" href="/styles/custom.css">
+    <link rel="stylesheet" href="/styles/dashboard_remove.css">
+    <link rel="stylesheet" href="/styles/projects_remove.css">
+    <link rel="stylesheet" href="/styles/responsive_remove.css">
+    <link rel="stylesheet" href="/styles/strider_remove.css">
+    <link rel="stylesheet" href="/styles/font-awesome.css">
+
+    <!-- TODO: host fontawesome stuff here? I hear Firefox can have trouble with this -->
+
+    <style>
+      [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+        display: none !important;
+      }
+    </style>
+
+  </head>
+
+  <body ng-app="BrowserSwarmApp" ng-controller="RootCtrl">
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Home</a></li>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/projects">Projects</a></li>
+            <li><a href="/account">Account</a></li>
+          </ul>
+
+          <p ng-show="currentUser" class='navbar-text pull-right logged-in'>Logged in as {{ currentUser.email }} |  (<a href="/logout">logout</a>)</p>
+
+          <form name="loginform" ng-show="! currentUser" id="navbar-signin-form"
+             class="navbar-form pull-right" ng-controller="LoginCtrl">
+            <input type="email" placeholder="Email" class="input-small" name="email" ng-model="user.email" required>
+            <input type="password" placeholder="Password" class="input-small" name="password" ng-model="user.password" required>
+            <button class="btn" ng-click="login()">Sign In</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <div ng-controller="ErrorCtrl" ng-cloak>
+      <div class="container error alert alert-block alert-danger fade in" ng-show="error.message" ng-bind-html="error.message"></div>
+    </div>
+
+    <div class="container main" ng-view>
+    </div><!-- /.container.main -->
+
+
+    <!-- LES SCRIPTS -->
+    <!-- TODO: bundle and minify most of these: -->
+    <!-- TODO: bundle JQuery? -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="/js/vendor/jquery.timeago.js"></script>
+    <script src="/js/vendor/bootstrap.js"></script>
+    <script src="/js/vendor/socket.io.js"></script>
+    <script src="/js/vendor/angular/angular.js"></script>
+    <!-- TODO: load angular minified in production env. bundle it? -->
+    <!--<script src="/js/vendor/angular/angular.min.js"></script>-->
+    <script src="/js/vendor/angular/angular-route.min.js"></script>
+    <script src="/js/vendor/angular/angular-sanitize.min.js"></script>
+    <script src="/js/vendor/bootbox.min.js"></script>
+    <script src="/js/browserswarm.js"></script>
+    <script>
+      setTimeout(function() {
+        $('input,select').each(function() { $(this).trigger('input'); });
+      }, 1000);
+    </script>
+  </body>
+</html>

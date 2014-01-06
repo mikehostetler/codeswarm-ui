@@ -1,0 +1,30 @@
+{
+  "name": "browserswarm-ui",
+  "version": "0.0.1",
+  "description": "BrowserSwarm Web UI Base",
+  "private": true,
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/BrowserSwarm/browserswarm-ui.git"
+  },
+  "author": "pgte",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BrowserSwarm/browserswarm-ui/issues"
+  },
+  "homepage": "https://github.com/BrowserSwarm/browserswarm-ui",
+  "dependencies": {
+    "node-static": "~0.7.2",
+    "http-proxy": "~0.10.4",
+    "konphyg": "~1.2.3",
+    "hogan.js": "~2.0.0",
+    "colors": "~0.6.2",
+    "gaze": "~0.4.3",
+    "browserify": "~3.19.0",
+    "bows": "~0.3.0",
+    "xtend": "~2.1.2"
+  }
+}
