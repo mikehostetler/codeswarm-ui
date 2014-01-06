@@ -39,6 +39,15 @@ process.once('SIGINT', function() {
   process.exit();
 });
 
-// Export
-module.exports = server;
-server.addDir = require('./static').addDir;
+
+// Exports
+
+module.exports   = server;
+server.addDir    = addDir;
+var staticAddDir = require('./static').addDir;
+var baseAddDir   = require('./base').addDir;
+
+function addDir(d) {
+  staticAddDir(d);
+  baseAddDir(d);
+}
