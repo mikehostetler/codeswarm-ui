@@ -5,6 +5,8 @@ var strider = config('strider');
 strider.url = '//' + strider.host;
 if (strider.port) strider.url += ':' + strider.port;
 
+if (process.env.STRIDER_URL) strider.url = process.env.STRIDER_URL;
+
 exports = module.exports = {
   strider: strider
 };
