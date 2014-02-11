@@ -54,7 +54,7 @@ function run() {
     map(prefix('public/js/filters/')));
 
   /// finalize args
-  args = args.concat(['-o', 'public/js/browserswarm.js']);
+  args = args.concat(['-o', 'public/js/codeswarm.js']);
 
   console.log('browserify %s'.yellow, args.join(' '));
 

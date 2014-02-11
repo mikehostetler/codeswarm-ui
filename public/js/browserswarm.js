@@ -1243,7 +1243,7 @@ module.exports = function isArguments(value) {
 var App =
 exports =
 module.exports =
-angular.module('BrowserSwarmApp', ['ngRoute', 'ngSanitize']);
+angular.module('CodeSwarmApp', ['ngRoute', 'ngSanitize']);
 
 /// App Config
 

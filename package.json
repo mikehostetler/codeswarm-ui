@@ -1,21 +1,21 @@
 {
-  "name": "browserswarm-ui",
+  "name": "codeswarm-ui",
   "version": "0.0.1",
-  "description": "BrowserSwarm Web UI Base",
+  "description": "CodeSwarm Web UI Base",
   "private": true,
   "scripts": {
     "start": "node index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/BrowserSwarm/browserswarm-ui.git"
+    "url": "git://github.com/codeswarm/codeswarm-ui.git"
   },
   "author": "pgte",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/BrowserSwarm/browserswarm-ui/issues"
+    "url": "https://github.com/codeswarm/codeswarm-ui/issues"
   },
-  "homepage": "https://github.com/BrowserSwarm/browserswarm-ui",
+  "homepage": "https://github.com/codeswarm/codeswarm-ui",
   "dependencies": {
     "node-static": "~0.7.2",
     "http-proxy": "~0.10.4",

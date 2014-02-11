@@ -9,7 +9,7 @@ if (require.main == module) {
 }
 
 function listening() {
-  console.log('BrowserSwarm Web server listening on port %d', server.address().port);
+  console.log('CodeSwarm Web server listening on port %d', server.address().port);
 }
 
 var devMode = (process.env.NODE_ENV || 'development') == 'development';
